@@ -16,7 +16,7 @@ from bin.exceptions import NoPickleFileException
 # print out more information
 print_debug = 1
 
-pickled_datasets_file = 'data/pickled_datasets.bin2'
+pickled_datasets_file = 'data/pickled_datasets.bin'
 submission_file = 'submission.csv'
 
 try:

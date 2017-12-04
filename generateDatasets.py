@@ -1,11 +1,6 @@
 #!/usr/bin/python3
 
-import pickle
-
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.ensemble import RandomForestClassifier
 
 # This imports the prepareData.py file from our "bin" folder
 from bin import prepareData

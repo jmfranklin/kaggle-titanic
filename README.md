@@ -12,3 +12,4 @@ Working on [kaggle titanic problem](https://www.kaggle.com/c/titanic)
 
 The binary file created by this script will not be uploaded to github, so run `./generateDatasets.py` before `./modelDatasets.py` for best results.
 
+04/12/2017 - JON - corrected bug in modelDatasets.py and tested push of changes to Github.
