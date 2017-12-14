@@ -2,6 +2,11 @@
 
 import pandas as pd
 
+# Matplotlib and seaborn used for correlation heatmap
+from matplotlib import pyplot as plt
+import seaborn as sns
+
+
 # This imports the prepareData.py file from our "bin" folder
 from bin import prepareData
 from bin.helperFunctions import storePickledData
@@ -21,10 +26,18 @@ train = pd.read_csv(train_file_in)
 test  = pd.read_csv(test_file_in)
 dataSets = [train, test]
 
+# look at where the missing values are whilst data is still raw
+if print_debug:
+    #print ('\n',train['Fare'].value_counts())
+    print('\nMissing values before imputation:\n', train.isnull().sum())
+    print('\nMissing values before imputation:\n', train.isnull().sum())
+
+
 # prepareData contains all the functions for adding features to the datasets
 dataSets = prepareData.prepare(dataSets)
 
 if print_debug:
+    print("\nmissing value counts after imputation:\n", train.isnull().sum())
     print('\n', train.describe())
     print("\n", train[['Gender', 'Survived']].groupby('Gender', as_index=False).mean())
     print("\n", train[['AgeGroup', 'Survived']].groupby('AgeGroup', as_index=False).mean())
@@ -33,6 +46,7 @@ if print_debug:
     print("\n", train[['Port', 'Survived']].groupby('Port', as_index=False).mean())
     print("\n", train[['Title', 'Survived']].groupby('Title', as_index=False).mean())
     print("\n", train[['Class', 'Survived']].groupby('Class', as_index=False).mean())
+
 
 ## drop unneeded features
 if print_debug:
@@ -47,6 +61,11 @@ train = train.drop('PassengerId', axis=1)
 
 if print_debug:
     print('\nAfter trimming unneeded features:\n', train.head(1))
+    # trying a correlation heatmap for data to see which variables most closely relate to each other
+    corr = train.corr()
+    sns.heatmap(corr,
+                cmap="RdBu", center=0,vmin=-1, vmax=1)
+    plt.show()
 
 # prepare data sets for the model(s)
 x_train = train.drop('Survived', axis=1)
